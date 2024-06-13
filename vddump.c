@@ -163,7 +163,6 @@ void print_hex( const uchar *p, int n, int indent) {
         if (m&1) {
             printf("%02x   ", p[i+2*j]);
             j++;
-
         }
 
         for ( ; j<8; j++) {
