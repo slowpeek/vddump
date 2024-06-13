@@ -264,7 +264,8 @@ int usage() {
       "[1] ECMA-119, section 8.4\n"
       "[2] ECMA-119, section 8.5\n"
       "\n"
-      "Homepage https://github.com/slowpeek/vddump\n");
+      "Homepage https://github.com/slowpeek/vddump\n"
+      );
 
     return 0;
 }
