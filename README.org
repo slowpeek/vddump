@@ -1,0 +1,97 @@
+* Usage
+
+#+begin_example
+  vddump [-c]
+#+end_example
+
+Dump iso9660 volume descriptors in human-readable form.
+
+It reads data from =stdin=. Input should be iso9660 VD. Only Primary VD
+(ECMA-119, section 8.4) and Supplementary VD (ECMA-119, section 8.5) are
+supported.
+
+Single-value fields are printed this way (the /parsed value/ is optional):
+
+#+begin_example
+  -- name offset length (parsed value)
+  xxd-style dump of the raw value
+#+end_example
+
+/Root Directory Record/ is a structure, it is expanded with extra indentation.
+
+* Options:
+
+- =-h= :: Show usage
+- =-c= :: Apply colors to field names and parsed values
+
+* Example
+
+Dump the first VD (the primary one) from =$iso= (partial output):
+
+#+begin_example
+  > dd bs=2048 skip=16 count=1 status=none < "$iso" | vddump
+  -- code 0 1 (1)
+  01                                       .
+  -- id 1 5
+  4344 3030 31                             CD001
+  -- version 6 1 (1)
+  01                                       .
+  -- unused1 7 1
+  00                                       .
+  -- system_id 8 32
+  2020 2020 2020 2020 2020 2020 2020 2020
+  2020 2020 2020 2020 2020 2020 2020 2020
+  -- volume_id 40 32
+  5562 756e 7475 2032 342e 3034 204c 5453  Ubuntu 24.04 LTS
+  2061 6d64 3634 2020 2020 2020 2020 2020   amd64
+  -- unused2 72 8
+  0000 0000 0000 0000                      ........
+  -- volume_space_size 80 8 (2985672)
+  c88e 2d00 002d 8ec8                      ..-..-..
+  -- unused3 88 32
+  0000 0000 0000 0000 0000 0000 0000 0000  ................
+  0000 0000 0000 0000 0000 0000 0000 0000  ................
+  -- volume_set_size 120 4 (1)
+  0100 0001                                ....
+  -- volume_sequence_number 124 4 (1)
+  0100 0001                                ....
+  -- logical_block_size 128 4 (2048)
+  0008 0800                                ....
+  -- path_table_size 132 8 (3072)
+  000c 0000 0000 0c00                      ........
+  -- type_l_path_table 140 4 (274)
+  1201 0000                                ....
+  -- opt_type_l_path_table 144 4 (0)
+  0000 0000                                ....
+  -- type_m_path_table 148 4 (20)
+  0000 0114                                ....
+  -- opt_type_m_path_table 152 4 (0)
+  0000 0000                                ....
+  -- root_directory_record 156 34
+    -- length 0 1 (34)
+    22                                       "
+    -- ext_attr_length 1 1 (0)
+    00                                       .
+    -- extent 2 8 (35)
+    2300 0000 0000 0023                      #......#
+    -- size 10 8 (2048)
+    0008 0000 0000 0800                      ........
+    -- date 18 7 (2024-04-24 11:28:51 GMT+00)
+    7c04 180b 1c33 00                        |....3.
+    -- flags 25 1 (2)
+    02                                       .
+    -- file_unit_size 26 1 (0)
+    00                                       .
+    -- interleave 27 1 (0)
+    00                                       .
+    -- volume_sequence_number 28 4 (1)
+    0100 0001                                ....
+    -- name_len 32 1 (1)
+    01                                       .
+    -- name 33 1
+    00                                       .
+  -- volume_set_id 190 128
+  ..
+#+end_example
+
+Full-length examples can be found [[examples/][here]].
