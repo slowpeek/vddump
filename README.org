@@ -29,7 +29,7 @@ Single-value fields are printed this way (the /parsed value/ is optional):
 Dump the first VD (the primary one) from =$iso= (partial output):
 
 #+begin_example
-  > dd bs=2048 skip=16 count=1 status=none < "$iso" | vddump
+  > dd bs=2048 skip=16 count=1 2>/dev/null < "$iso" | vddump
   -- code 0 1 (1)
   01                                       .
   -- id 1 5

@@ -260,7 +260,7 @@ int usage() {
       "\n"
       "Dump the first VD (the primary one) from $iso:\n"
       "\n"
-      "  dd bs=2048 skip=16 count=1 status=none < \"$iso\" | vddump\n"
+      "  dd bs=2048 skip=16 count=1 2>/dev/null < \"$iso\" | vddump\n"
       "\n"
       "Homepage https://github.com/slowpeek/vddump\n"
       );
