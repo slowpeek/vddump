@@ -204,7 +204,7 @@ void dump_field_list( const uchar *buf, const struct vd_field *pf, int indent) {
             print = 1;
             break;
         case _732:
-            value.i = data[3] | data[2]<<2 | data[1]<<16 | data[0]<<24;
+            value.i = data[3] | data[2]<<8 | data[1]<<16 | data[0]<<24;
             print = 1;
             break;
         case _915:
